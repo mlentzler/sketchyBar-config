@@ -49,15 +49,7 @@ SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "0")
 
 for sid in $(aerospace list-workspaces --all); do
   # Determine icon based on workspace ID
-  space_icon=""
-  case "$sid" in
-  a1) space_icon="↖" ;;
-  b1) space_icon="Q" ;;
-  b2) space_icon="W" ;;
-  b3) space_icon="E" ;;
-  b4) space_icon="R" ;;
-  *) space_icon="$sid" ;;
-  esac
+  space_icon="$sid"
 
   sketchybar --add item space.$sid left \
     --subscribe space.$sid aerospace_workspace_change \
@@ -88,8 +80,13 @@ sketchybar --add item chevron left \
   --set chevron icon= label.drawing=off \
   --add item front_app left \
   --set front_app icon.drawing=off label.drawing=on script="$PLUGIN_DIR/front_app.sh" \
-    icon.color=$ORANGE \
-    label.color=$ORANGE \
+    icon.color=$MAGENTA \
+    label.color=$MAGENTA \
+    label.padding_right=5 \
+    background.drawing=on \
+    background.color="$GREY" \
+    background.corner_radius=8 \
+    background.height=25 \
   --subscribe front_app front_app_switched \
   
 
