@@ -1,0 +1,1 @@
+# sketchyBar-config
