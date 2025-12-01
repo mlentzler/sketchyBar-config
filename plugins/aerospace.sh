@@ -8,9 +8,9 @@ source "$CONFIG_DIR/colors.sh"
 
 if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
   sketchybar --set $NAME background.drawing=on \
-    background.color=$ACCENT_TRANSPARENT \
-    icon.color=$ACCENT \
-    label.color=$ACCENT
+    background.color=$ACCENT \
+    icon.color=$WHITE \
+    label.color=$WHITE
 else
   sketchybar --set $NAME background.drawing=off \
     icon.color=$WHITE \

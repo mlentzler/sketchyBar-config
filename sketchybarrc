@@ -72,7 +72,6 @@ for sid in $(aerospace list-workspaces --all); do
     icon="$space_icon" \
     icon.font="SF Pro:Bold:16.0" \
     icon.color=0xffffffff \
-    icon.highlight_color=$ACCENT \
     label.drawing=off \
     label.font="sketchybar-app-font:Regular:14.0" \
     label.color=0xffffffff \
@@ -107,8 +106,16 @@ sketchybar --add item chevron left \
 
 sketchybar --add item clock right \
   --set clock update_freq=10 icon=󰅐 icon.font="Hack Nerd Font:Regular:14.0" label.color=$LIGHT_WHITE script="$PLUGIN_DIR/clock.sh" \
+  background.drawing=on \
+  background.color="$GREY" \
+  background.corner_radius=8 \
+  background.height=25 \
   --add item battery right \
   --set battery update_freq=120 icon.drawing=on icon.font="Hack Nerd Font:Regular:14.0" label.color=$LIGHT_WHITE icon.color=$LIGHT_WHITE script="$PLUGIN_DIR/battery.sh" \
+  background.drawing=on \
+  background.color="$GREY" \
+  background.corner_radius=8 \
+  background.height=25 \
   --subscribe battery system_woke power_source_change \
   --add item calendar_event right \
   --set calendar_event \
@@ -118,9 +125,36 @@ sketchybar --add item clock right \
   icon.font="Hack Nerd Font:Regular:14.0" \
   label.color="$WHITE" \
   background.drawing=on \
-  background.color="$GREY_TRANSP" \
+  background.color="$GREY" \
   background.corner_radius=8 \
   background.height=25 \
+
+
+sketchybar --add item timer right \
+           --set timer label="No Timer" \
+                       icon=􀐱   \
+                       icon.color=0xFFF9E2AF \
+                       icon.padding_right=6 \
+                       y_offset=1 \
+                       background.drawing=on \
+                       background.color="$GREY" \
+                       background.corner_radius=8 \
+                       background.height=25 \
+                       script="$PLUGIN_DIR/pomodoro.sh" \
+                       popup.background.corner_radius=10                               \
+                       popup.background.color=0xFF1E1E2E                       \
+                       popup.background.border_width=1 \
+                       popup.background.border_color=0xFF45475A \
+                       --subscribe timer mouse.clicked mouse.entered mouse.exited mouse.exited.global \
+                       
+
+for timer in "5" "10" "25"; do
+sketchybar --add item "timer.${timer}" popup.timer \
+            --set "timer.${timer}" label="${timer} Minutes" \
+                        padding_left=16 \
+                        padding_right=16 \
+                        click_script="$PLUGIN_DIR/pomodoro.sh $((timer * 60)); sketchybar -m --set timer popup.drawing=off"
+done
   
 
 ##### Force all scripts to run the first time (never do this in a script) #####
