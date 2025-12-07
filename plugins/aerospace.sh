@@ -32,7 +32,7 @@ if [ -n "$apps" ]; then
 fi
 
 if [ -n "$icon_string" ]; then
-  sketchybar --set $NAME label="$icon_string" label.drawing=on
+  sketchybar --set $NAME label="$icon_string" label.drawing=on icon.padding_right=0
 else
-  sketchybar --set $NAME label.drawing=off
+  sketchybar --set $NAME label.drawing=off icon.padding_right=10
 fi
